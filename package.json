@@ -1,0 +1,26 @@
+{
+  "name": "rpi-led",
+  "version": "1.0.0",
+  "description": "Simple LED controller using express and rpi-gpio",
+  "main": "index.js",
+  "scripts": {
+    "test": "status"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikeBengtson/rpi-led.git"
+  },
+  "keywords": [
+    "rpi-gpio"
+  ],
+  "author": "Mike Bengtson",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/MikeBengtson/rpi-led/issues"
+  },
+  "homepage": "https://github.com/MikeBengtson/rpi-led#readme",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0"
+  }
+}
