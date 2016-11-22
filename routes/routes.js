@@ -7,6 +7,22 @@ var appRouter = function(app, service) {
       res.send("up");
   }); 
 
+  app.get("/led", function(req, res) {
+    if(req.query.name)
+    {
+      service.getState(req.query.name, req.query.state, function(err, value) {
+	      if (!err) {
+	        res.send(value ? "on" : "off")
+          } else {
+              res.send("ERROR (led: " + req.query.name + ", state: " + req.query.state + "): " + err)
+          }
+      });
+    } else
+    {
+      res.send("ERROR: no name");
+    }
+  });
+
   app.put("/led", function(req, res) {
     if(req.query.name && req.query.state)
     {
@@ -15,33 +31,18 @@ var appRouter = function(app, service) {
           service.getState(req.query.name, req.query.state, function(err, value) {
             if (!err)
               res.send(value ? "on" : "off")
-             else
-              res.send("ERROR (led: " + req.query.id + ", state: " + req.query.state + "): " + err)
+            else
+              res.send("ERROR (led: " + req.query.name + ", state: " + req.query.state + "): " + err)
           });
         } else
-          res.send("ERROR (led: " + req.query.id + ", state: " + req.query.state + "): " + err)
+          res.send("ERROR (led: " + req.query.name + ", state: " + req.query.state + "): " + err)
       });
     } else
     {
-      res.send("error: no led name and/or state query param");
+      res.send("ERROE: no led name and/or state query param");
     }
-  }); 
+  });
 
-  app.get("/led", function(req, res) {
-    if(req.query.name)
-    {
-      service.getState(req.query.name, req.query.state, function(err, value) {
-	      if (!err) {
-	        res.send(value ? "on" : "off")
-          } else {
-              res.send("ERROR (led: " + req.query.id + ", state: " + req.query.state + "): " + err)
-          }
-      });
-    } else
-    {
-      res.send("error: no name");
-    }
-  }); 
 }
  
 module.exports = appRouter;
