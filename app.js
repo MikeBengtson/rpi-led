@@ -1,23 +1,27 @@
 var express = require("express");
-var bodyParser = require("body-parser");
 var app = express();
- 
+
+var bodyParser = require("body-parser");
+var routes = require("./routes/routes.js");
+var gpio = require("rpi-gpio");
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
- 
-var routes = require("./routes/routes.js")(app);
- 
+
 var server = app.listen(3000, function () {
 
-  app.gpio = require('rpi-gpio');
+  var leds = {
+      yellow: 8,
+      white: 10,
+      blue: 16
+  }
 
-  app.gpio.setup(8, app.gpio.DIR_OUT, function() {
-    app.gpio.setup(10, app.gpio.DIR_OUT, function() {
-      app.gpio.setup(16, app.gpio.DIR_OUT, function() {
+  var ledService = require("./services/ledService.js");
+  var service = new ledService(gpio, leds);
+  app.routes = new routes(app, service);
 
+  service.setup(function() {
         console.log("Listening on port %s...", server.address().port);
-
-      });
-    });
   });
+
 });

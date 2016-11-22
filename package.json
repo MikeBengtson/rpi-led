@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/MikeBengtson/rpi-led#readme",
   "dependencies": {
+    "async": "^2.1.2",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "pi-gpio": "0.0.8"
