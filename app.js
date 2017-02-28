@@ -11,9 +11,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 var server = app.listen(3000, function () {
 
   var leds = {
-      yellow: 8,
-      white: 10,
-      blue: 16
+      blue: 8,
+      yellow: 10,
+      red: 16
   }
 
   var ledService = require("./services/ledService.js");
